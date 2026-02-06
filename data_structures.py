@@ -65,8 +65,17 @@ def batch_api_dispatcher(user_ids: list | tuple) -> list:
 # TODO:Question 6
 # ============================
 def social_graph_inverter(following_list: dict) -> dict:
-    pass
+    res = {}
 
+    for k, v in following_list.items():
+        for name in v:
+            if name not in res:
+                res[name] = [k]
+            else:
+                res[name].append(k)
+    
+    return res
+print(social_graph_inverter({"Alice": ["Bob", "Charlie"], "Bob": ["Charlie"]}))
 
 # ============================
 # TODO:Question 7

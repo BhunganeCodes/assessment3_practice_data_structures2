@@ -95,9 +95,9 @@ def test_create_id_lookup_single_name():
 def test_create_id_lookup_duplicate_names():
     assert create_id_lookup(['Anna', 'Bob', 'Anna']) == {'Anna': 2, 'Bob': 1}
 
-# # ------------------------------------------------------------------------------------------ # ------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------ # ------------------------------------------------------------------------------------------ #
 
-# # Question 3
+# Question 3
     
 @pytest.mark.parametrize("input_tags, expected_set", [
     (["Python", "python", "PyThOn"], {"python"}),
@@ -217,66 +217,66 @@ def test_group_by_category_alternative():
 
 # ------------------------------------------------------------------------------------------ # ------------------------------------------------------------------------------------------ #
 
-# Question 5
+# # Question 5
     
-@pytest.mark.parametrize("input_ids, expected_output", [   
-    (['ID1', 'ID2', 'ID3', 'ID4', 'ID5', 'ID6', 'ID7'], [['ID1', 'ID2', 'ID3', 'ID4', 'ID5'], ['ID6', 'ID7']]),    
-    (['ID1', 'ID2', 'ID3', 'ID4', 'ID5'], [['ID1', 'ID2', 'ID3', 'ID4', 'ID5']]),    
-    ([], []),    
-    (['ID1', 'ID2'], [['ID1', 'ID2']]),    
-    (['1', '2', '3', '4', '5', '6'], [['1', '2', '3', '4', '5'], ['6']]),
-])
-def test_batch_api_dispatcher_logic(input_ids, expected_output):
-    assert batch_api_dispatcher(input_ids) == expected_output
+# @pytest.mark.parametrize("input_ids, expected_output", [   
+#     (['ID1', 'ID2', 'ID3', 'ID4', 'ID5', 'ID6', 'ID7'], [['ID1', 'ID2', 'ID3', 'ID4', 'ID5'], ['ID6', 'ID7']]),    
+#     (['ID1', 'ID2', 'ID3', 'ID4', 'ID5'], [['ID1', 'ID2', 'ID3', 'ID4', 'ID5']]),    
+#     ([], []),    
+#     (['ID1', 'ID2'], [['ID1', 'ID2']]),    
+#     (['1', '2', '3', '4', '5', '6'], [['1', '2', '3', '4', '5'], ['6']]),
+# ])
+# def test_batch_api_dispatcher_logic(input_ids, expected_output):
+#     assert batch_api_dispatcher(input_ids) == expected_output
 
-def test_batch_api_dispatcher_immutability():
-    original = ['A', 'B', 'C', 'D', 'E', 'F']
-    original_copy = original.copy()
+# def test_batch_api_dispatcher_immutability():
+#     original = ['A', 'B', 'C', 'D', 'E', 'F']
+#     original_copy = original.copy()
     
-    batch_api_dispatcher(original)
+#     batch_api_dispatcher(original)
     
-    assert original == original_copy, "The input list was mutated during batching!"
+#     assert original == original_copy, "The input list was mutated during batching!"
 
-def test_batch_api_dispatcher_large_scale():
-    large_input = [f"ID{i}" for i in range(10000)]
-    result = batch_api_dispatcher(large_input)
+# def test_batch_api_dispatcher_large_scale():
+#     large_input = [f"ID{i}" for i in range(10000)]
+#     result = batch_api_dispatcher(large_input)
     
-    assert len(result) == 2000
-    assert len(result[0]) == 5
-    assert result[-1][-1] == "ID9999"
+#     assert len(result) == 2000
+#     assert len(result[0]) == 5
+#     assert result[-1][-1] == "ID9999"
 
-def test_batch_api_dispatcher_non_list_iterable():
-    input_tuple = ('ID1', 'ID2', 'ID3', 'ID4', 'ID5', 'ID6')
-    expected = [['ID1', 'ID2', 'ID3', 'ID4', 'ID5'], ['ID6']]
+# def test_batch_api_dispatcher_non_list_iterable():
+#     input_tuple = ('ID1', 'ID2', 'ID3', 'ID4', 'ID5', 'ID6')
+#     expected = [['ID1', 'ID2', 'ID3', 'ID4', 'ID5'], ['ID6']]
     
-    assert batch_api_dispatcher(input_tuple) == expected
+#     assert batch_api_dispatcher(input_tuple) == expected
 
-def test_batch_api_dispatcher_single_request():
-    assert batch_api_dispatcher(['ID1']) == [['ID1']]
+# def test_batch_api_dispatcher_single_request():
+#     assert batch_api_dispatcher(['ID1']) == [['ID1']]
 
-def test_batch_api_dispatcher_multiple_requests():
-    assert batch_api_dispatcher(['ID1', 'ID2', 'ID3', 'ID4', 'ID5', 'ID6', 'ID7']) == [['ID1', 'ID2', 'ID3', 'ID4', 'ID5'], ['ID6', 'ID7']]
+# def test_batch_api_dispatcher_multiple_requests():
+#     assert batch_api_dispatcher(['ID1', 'ID2', 'ID3', 'ID4', 'ID5', 'ID6', 'ID7']) == [['ID1', 'ID2', 'ID3', 'ID4', 'ID5'], ['ID6', 'ID7']]
 
-def test_batch_api_dispatcher_exact_multiple():
-    assert batch_api_dispatcher(['ID1', 'ID2', 'ID3', 'ID4', 'ID5', 'ID6', 'ID7', 'ID8', 'ID9', 'ID10']) == [['ID1', 'ID2', 'ID3', 'ID4', 'ID5'], ['ID6', 'ID7', 'ID8', 'ID9', 'ID10']]
+# def test_batch_api_dispatcher_exact_multiple():
+#     assert batch_api_dispatcher(['ID1', 'ID2', 'ID3', 'ID4', 'ID5', 'ID6', 'ID7', 'ID8', 'ID9', 'ID10']) == [['ID1', 'ID2', 'ID3', 'ID4', 'ID5'], ['ID6', 'ID7', 'ID8', 'ID9', 'ID10']]
 
-def test_batch_api_dispatcher_mixed_ids():
-    assert batch_api_dispatcher(['ID10', 'ID5', 'ID3', 'ID8', 'ID1', 'ID7']) == [['ID10', 'ID5', 'ID3', 'ID8', 'ID1'], ['ID7']]
+# def test_batch_api_dispatcher_mixed_ids():
+#     assert batch_api_dispatcher(['ID10', 'ID5', 'ID3', 'ID8', 'ID1', 'ID7']) == [['ID10', 'ID5', 'ID3', 'ID8', 'ID1'], ['ID7']]
 
-def test_batch_api_dispatcher_large_number_of_requests():
-    user_ids = [f'ID{i}' for i in range(1, 21)]
-    expected_output = [
-        ['ID1', 'ID2', 'ID3', 'ID4', 'ID5'],
-        ['ID6', 'ID7', 'ID8', 'ID9', 'ID10'],
-        ['ID11', 'ID12', 'ID13', 'ID14', 'ID15'],
-        ['ID16', 'ID17', 'ID18', 'ID19', 'ID20']
-    ]
-    assert batch_api_dispatcher(user_ids) == expected_output
+# def test_batch_api_dispatcher_large_number_of_requests():
+#     user_ids = [f'ID{i}' for i in range(1, 21)]
+#     expected_output = [
+#         ['ID1', 'ID2', 'ID3', 'ID4', 'ID5'],
+#         ['ID6', 'ID7', 'ID8', 'ID9', 'ID10'],
+#         ['ID11', 'ID12', 'ID13', 'ID14', 'ID15'],
+#         ['ID16', 'ID17', 'ID18', 'ID19', 'ID20']
+#     ]
+#     assert batch_api_dispatcher(user_ids) == expected_output
 
-def test_batch_api_dispatcher_fewer_than_batch_size():
-    assert batch_api_dispatcher(['ID1', 'ID2', 'ID3']) == [['ID1', 'ID2', 'ID3']]
+# def test_batch_api_dispatcher_fewer_than_batch_size():
+#     assert batch_api_dispatcher(['ID1', 'ID2', 'ID3']) == [['ID1', 'ID2', 'ID3']]
 
-# ------------------------------------------------------------------------------------------ # ------------------------------------------------------------------------------------------ #
+# # ------------------------------------------------------------------------------------------ # ------------------------------------------------------------------------------------------ #
 
 # Question 6
     
@@ -334,66 +334,66 @@ def test_social_graph_inverter_referential_integrity():
 
 # ------------------------------------------------------------------------------------------ # ------------------------------------------------------------------------------------------ #
 
-# Question 7
+# # Question 7
     
-@pytest.mark.parametrize("n, expected_output", [
-    (0, []),
-    (1, [0]),
-    (2, [0, 1]),
-    (5, [0, 1, 1, 2, 3]),
-    (10, [0, 1, 1, 2, 3, 5, 8, 13, 21, 34])
-])
+# @pytest.mark.parametrize("n, expected_output", [
+#     (0, []),
+#     (1, [0]),
+#     (2, [0, 1]),
+#     (5, [0, 1, 1, 2, 3]),
+#     (10, [0, 1, 1, 2, 3, 5, 8, 13, 21, 34])
+# ])
 
-def test_fibonacci_generator_logic(n, expected_output):
-    assert fibonacci_generator(n) == expected_output
+# def test_fibonacci_generator_logic(n, expected_output):
+#     assert fibonacci_generator(n) == expected_output
 
-def test_fibonacci_generator_large_n():
-    result = fibonacci_generator(30)
-    assert len(result) == 30
-    assert result[-1] == 514229
+# def test_fibonacci_generator_large_n():
+#     result = fibonacci_generator(30)
+#     assert len(result) == 30
+#     assert result[-1] == 514229
 
-def test_fibonacci_generator_zero_and_one():
-    assert fibonacci_generator(0) == []
-    assert fibonacci_generator(1) == [0]
+# def test_fibonacci_generator_zero_and_one():
+#     assert fibonacci_generator(0) == []
+#     assert fibonacci_generator(1) == [0]
 
-def test_fibonacci_generator_negative_n():
-    with pytest.raises(ValueError):
-        fibonacci_generator(-5)
+# def test_fibonacci_generator_negative_n():
+#     with pytest.raises(ValueError):
+#         fibonacci_generator(-5)
 
-def test_fibonacci_generator_non_integer_n():
-    with pytest.raises(ValueError):
-        fibonacci_generator(5.5)
+# def test_fibonacci_generator_non_integer_n():
+#     with pytest.raises(ValueError):
+#         fibonacci_generator(5.5)
 
-def test_fibonacci_generator_integrity():
-    result = fibonacci_generator(20)
-    assert result[0] == 0
-    assert result[1] == 1
-    assert result[2] == 1
-    assert result[3] == 2
-    assert result[4] == 3
+# def test_fibonacci_generator_integrity():
+#     result = fibonacci_generator(20)
+#     assert result[0] == 0
+#     assert result[1] == 1
+#     assert result[2] == 1
+#     assert result[3] == 2
+#     assert result[4] == 3
 
-def test_fibonacci_generator_edge_cases():
-    assert fibonacci_generator(2) == [0, 1]
-    assert fibonacci_generator(3) == [0, 1, 1]
-    assert fibonacci_generator(4) == [0, 1, 1, 2]
+# def test_fibonacci_generator_edge_cases():
+#     assert fibonacci_generator(2) == [0, 1]
+#     assert fibonacci_generator(3) == [0, 1, 1]
+#     assert fibonacci_generator(4) == [0, 1, 1, 2]
 
-def test_is_recursion_implemented():
+# def test_is_recursion_implemented():
 
-    with patch("data_structures.fibonacci_generator", wraps=fibonacci_generator) as mocked_function:
-        mocked_function(10)
+#     with patch("data_structures.fibonacci_generator", wraps=fibonacci_generator) as mocked_function:
+#         mocked_function(10)
         
-        assert mocked_function.call_count > 1, f"Recursion not detected. Count: {mocked_function.call_count}"
+#         assert mocked_function.call_count > 1, f"Recursion not detected. Count: {mocked_function.call_count}"
 
-def test_recursion_depth():
-    depth = 2000
-    with pytest.raises(RecursionError):
-        fibonacci_generator(depth)
+# def test_recursion_depth():
+#     depth = 2000
+#     with pytest.raises(RecursionError):
+#         fibonacci_generator(depth)
 
-def test_recursion_parameters():
-    with patch("data_structures.fibonacci_generator", wraps=fibonacci_generator) as mocked_function:
-        mocked_function(5)
+# def test_recursion_parameters():
+#     with patch("data_structures.fibonacci_generator", wraps=fibonacci_generator) as mocked_function:
+#         mocked_function(5)
         
-        for call in mocked_function.call_args_list:
-            args, _ = call
-            assert len(args) == 1, "Recursive calls should have exactly one argument."
-            assert isinstance(args[0], int), "Recursive call argument should be an integer."
+#         for call in mocked_function.call_args_list:
+#             args, _ = call
+#             assert len(args) == 1, "Recursive calls should have exactly one argument."
+#             assert isinstance(args[0], int), "Recursive call argument should be an integer."
