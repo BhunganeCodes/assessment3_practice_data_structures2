@@ -81,5 +81,16 @@ print(social_graph_inverter({"Alice": ["Bob", "Charlie"], "Bob": ["Charlie"]}))
 # TODO:Question 7
 # ============================
 def fibonacci_generator(n: int) -> list:
-    pass
+    if n < 0:
+        raise ValueError
+    if n == 0:
+        return []
+    if n == 1:
+        return [0]
+    if n == 2:
+        return [0, 1]
+    else:
+        res = fibonacci_generator(n - 1)
+        res.append(res[-1] + res[-2])
+        return res
 
