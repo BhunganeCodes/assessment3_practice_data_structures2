@@ -18,7 +18,12 @@ def split_coords(coordinates: list) -> tuple:
 # TODO:Question 2
 # ============================
 def create_id_lookup(user_data: list) -> dict:
-    pass
+    res = {}
+
+    for idx, name in enumerate(user_data):
+        res[name] = idx
+
+    return res
 
 
 # ============================
