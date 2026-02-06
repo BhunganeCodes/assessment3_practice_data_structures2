@@ -52,13 +52,20 @@ def group_by_category(items: list) -> dict:
     
     return res
 
-print(group_by_category([{"name": "Boerewors", "type": "Meat"}, {"name": "Charcoal", "type": "Hardware"}, {"name": "Lamb Chops", "type": "Meat"}, {"name": "Chakalaka", "type": "Canned Goods"}]))
 
 # ============================
 # TODO:Question 5
 # ============================
 def batch_api_dispatcher(user_ids: list | tuple) -> list:
-    pass
+    res = []
+
+    for id in user_ids:
+        if res and len(res[-1]) < 5:
+            res[-1].append(id)
+        else:
+            res.append([id])
+
+    return res
 
 
 # ============================
@@ -75,7 +82,7 @@ def social_graph_inverter(following_list: dict) -> dict:
                 res[name].append(k)
     
     return res
-print(social_graph_inverter({"Alice": ["Bob", "Charlie"], "Bob": ["Charlie"]}))
+
 
 # ============================
 # TODO:Question 7
