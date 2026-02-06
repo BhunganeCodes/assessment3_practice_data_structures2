@@ -3,7 +3,15 @@
 # TODO:Question 1
 # ============================
 def split_coords(coordinates: list) -> tuple:
-    pass
+    x_list = []
+    y_list = []
+
+    for coords in coordinates:
+        x, y = coords
+        x_list.append(x)
+        y_list.append(y)
+    
+    return x_list, y_list
 
 
 # ============================
