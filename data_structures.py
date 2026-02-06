@@ -30,7 +30,12 @@ def create_id_lookup(user_data: list) -> dict:
 # TODO:Question 3
 # ============================
 def extract_unique_tags(posts: list) -> set:
-    pass
+    res = set()
+
+    for post in posts:
+        res.add(post.lower())
+    
+    return res
 
 
 # ============================
