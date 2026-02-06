@@ -42,9 +42,17 @@ def extract_unique_tags(posts: list) -> set:
 # TODO:Question 4
 # ============================
 def group_by_category(items: list) -> dict:
-    pass
+    res = {}
 
+    for item in items:
+        if item["type"] not in res:
+            res[item["type"]] = [item["name"]]
+        else:
+            res[item["type"]].append(item["name"])
+    
+    return res
 
+print(group_by_category([{"name": "Boerewors", "type": "Meat"}, {"name": "Charcoal", "type": "Hardware"}, {"name": "Lamb Chops", "type": "Meat"}, {"name": "Chakalaka", "type": "Canned Goods"}]))
 
 # ============================
 # TODO:Question 5
